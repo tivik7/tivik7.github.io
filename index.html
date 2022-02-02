@@ -1,1 +1,62 @@
-Pages
+<html>
+    <head>
+        <script>
+            function beregn(clsName, qtyId)
+            {
+                // Finn ut hvor mange porsjoner som er valgt i select tag med id lik verdien av variabelen qtyId
+                var porsjoner = document.getElementById(qtyId).value;
+                console.log("Rgener ut",porsjoner,"porsjoner fra",qtyId,"merket med klasse",clsName);
+                // Lag en liste over alle elementer som har klasse lik verdien av variabelen clsName
+                var ingredienser = document.getElementsByClassName(clsName);
+                // Gå gjennom hvert element som er funnet
+                for(var n = 0; n < ingredienser.length; n++)
+                {
+                    // Finn "barnet" med id qty og endre teksten til resultatet av
+                    // prosjoner ganget med value attributten som står på div tag
+                    ingredienser[n].children["qty"].innerText = (porsjoner * parseFloat(ingredienser[n].children["qty"].getAttribute("value")));
+                }
+            }
+        </script>
+        <!--
+            stylen er bare for å fjerne linjeskift etter div som er i en liste
+        -->
+        <style>
+            ul li div {
+                display: inline;
+            }
+        </style>
+    </head>
+<body>
+    <label>Oppskrift 1</label>
+    <select id="porsjoner1" onchange="beregn('ingrediens1','porsjoner1')">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+    <ul>
+        <li class="ingrediens1"><div id="qty" value="1">1</div> av ingrediens</li>
+        <li class="ingrediens1"><div id="qty" value="0.25">0.25</div> av ingrediens</li>
+        <li class="ingrediens1"><div id="qty" value="0.5">0.5</div> av ingrediens</li>
+        <li class="ingrediens1"><div id="qty" value="2">2</div> av ingrediens</li>
+    </ul>
+    <hr/>
+    <label>Oppskrift 2</label>
+    <select id="porsjoner2" onchange="beregn('ingrediens2','porsjoner2')">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+    <ul>
+        <li class="ingrediens2"><div id="qty" value="2">2</div> av ingrediens</li>
+        <li class="ingrediens2"><div id="qty" value="3">3</div> av ingrediens</li>
+        <li class="ingrediens2"><div id="qty" value="0.75">0.75</div> av ingrediens</li>
+        <li class="ingrediens2"><div id="qty" value="8">8</div> av ingrediens</li>
+    </ul>
+</body>
+</html>
